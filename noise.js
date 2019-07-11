@@ -57,7 +57,7 @@ const sketch = () => {
       context.arc(x, y, radius * width, 0, Math.PI * 2, false);
       context.fillStyle = color;
       context.fill();
-      context.strokeStyle = color;
+      context.strokeStyle = random.pick(palette);
       context.lineWidth = 20;
       context.stroke();
     });
