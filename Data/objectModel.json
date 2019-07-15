@@ -1,0 +1,54 @@
+{
+    "_index": "packets-2019-07-14",
+    "_type": "pcap_file",
+    "_score": null,
+    "_source": {
+      "layers": {
+        "frame": {
+          "frame.interface_id": "0",
+          "frame.interface_id_tree": {
+            "frame.interface_description": "Wi-Fi"
+          },
+          "frame.time": "Jul 14, 2019 00:10:14.735721000 -03",
+          "frame.protocols": "eth:ethertype:ip:tcp:vssmonitoring",
+          "frame.coloring_rule.name": "TCP",
+          "frame.coloring_rule.string": "tcp"
+        },
+        "eth": {
+          "eth.dst": "3c:15:c2:e5:e0:7e",
+          "eth.dst_tree": {
+            "eth.dst_resolved": "Apple_e5:e0:7e",
+            "eth.addr_resolved": "Apple_e5:e0:7e"
+          },
+          "eth.src": "c4:b8:b4:96:ec:1f",
+          "eth.src_tree": {
+            "eth.src_resolved": "HuaweiTe_96:ec:1f",
+            "eth.addr": "c4:b8:b4:96:ec:1f",
+            "eth.addr_resolved": "HuaweiTe_96:ec:1f",
+            "eth.lg": "0",
+            "eth.ig": "0"
+          }
+        },
+        "ip": {
+          "ip.version": "4",
+          "ip.hdr_len": "20",
+          "ip.src": "18.228.99.199",
+          "ip.addr": "18.228.99.199",
+          "ip.src_host": "ec2-18-228-99-199.sa-east-1.compute.amazonaws.com",
+          "ip.host": "ec2-18-228-99-199.sa-east-1.compute.amazonaws.com",
+          "ip.dst": "192.168.100.4",
+          "ip.addr": "192.168.100.4",
+          "ip.dst_host": "192.168.100.4",
+          "ip.host": "192.168.100.4"
+        },
+        "tcp": {
+          "tcp.srcport": "443",
+          "tcp.dstport": "59969",
+          "tcp.port": "443",
+          "tcp.port": "59969",
+          "tcp.stream": "0",
+          "tcp.len": "0"
+          }
+        }
+    }
+}
