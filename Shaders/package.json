@@ -1,0 +1,19 @@
+{
+  "name": "Shaders",
+  "version": "1.0.0",
+  "description": "",
+  "main": "shader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas-sketch": "^0.5.0",
+    "canvas-sketch-util": "^1.8.0",
+    "glsl-hsl2rgb": "^1.1.0",
+    "glsl-noise": "0.0.0",
+    "glslify": "^7.0.0"
+  }
+}
