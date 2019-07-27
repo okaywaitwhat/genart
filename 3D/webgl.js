@@ -3,7 +3,6 @@ const random = require('canvas-sketch-util/random');
 const palettes = require('nice-color-palettes');
 const eases = require('eases');
 const BezierEasing = require('bezier-easing');
-const glslify = require('glslify');
 
 // Ensure ThreeJS is in global scope for the 'examples/'
 global.THREE = require('three');
@@ -40,40 +39,13 @@ const sketch = ({ context }) => {
 
   const palette = random.pick(palettes);
 
-  const fragmentShader = `
-  varying vec2 vUv;
-  uniform vec3 color;
-
-    void main () {
-     gl_FragColor = vec4(vec3(color * vUv.x), 1.0);
-    }
-  `;
-
-  const vertexShader = glslify(`
-  varying vec2 vUv;
-  uniform float time;
-  #pragma glslify: noise = require('glsl-noise/simplex/4d');
-
-    void main () {
-      vUv = uv;
-      vec3 pos = position.xyz;
-      pos += noise(vec4(position.xyz, time)) * 1.0;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-    }
-  `);
-
   const box = new THREE.BoxGeometry(1, 1, 1);
-  const meshes = [];
+
     for (let i = 0; i < 40; i++) {
       const mesh = new THREE.Mesh(
         box,
-        new THREE.ShaderMaterial({
-          fragmentShader, 
-          vertexShader,
-          uniforms: {
-            time: { value: 0 },
-            color: { value: new THREE.Color( random.pick(palette)) },
-          }
+        new THREE.MeshStandardMaterial({ // change to Basic/Standard Material for shadows
+          color: random.pick(palette),
         })
       );
       mesh.position.set(
@@ -88,10 +60,9 @@ const sketch = ({ context }) => {
       );
       mesh.scale.multiplyScalar(0.5)
       scene.add(mesh);
-      meshes.push(mesh);
     }
 
-    scene.add(new THREE.AmbientLight('hsl(0, 0%, 20%)'));
+    scene.add(new THREE.AmbientLight('hsl(0, 0%, 20%'))
     const light = new THREE.DirectionalLight('white', 1);
     light.position.set(2, 2, 4)
     scene.add(light);
@@ -117,7 +88,7 @@ const sketch = ({ context }) => {
       const aspect = viewportWidth / viewportHeight;
 
       // Ortho zoom
-      const zoom = 2;
+      const zoom = 1;
 
       // Bounds
       camera.left = -zoom * aspect;
@@ -137,16 +108,11 @@ const sketch = ({ context }) => {
       camera.updateProjectionMatrix();
     },
     // Update & render your scene here
-    render ({ playhead, time }) {
+    render ({ playhead }) {
      // mesh.rotation.y = time * (10 * Math.PI / 180);
       const t = Math.sin(playhead * Math.PI * 2);
       scene.rotation.z = easeFn(t);
-      scene.rotation.y = playhead * (Math.PI * 2),
-
-      meshes.forEach(mesh => {
-        mesh.material.uniforms.time.value = time;
-      });
-
+      //scene.rotation.y = playhead * (Math.PI * 2),
       renderer.render(scene, camera);
     },
     // Dispose of events & renderer for cleaner hot-reloading
